@@ -1,58 +1,66 @@
-import React from 'react';
-// import logo from './logo.svg';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import CommentInput from './components/CommentInput';
-import UserName  from './components/UserName';
+import UserName from './components/UserName';
 import { Button } from '@mui/material';
-// import { AuthProvider } from './components/AuthProvider';
 import { useAuth } from './components/AuthProvider';
 import Header from './components/Header';
+import CommentList from './components/CommentList';
+import { getComments } from './services/commentService';
 
 function App() {
   const { user, login, logout } = useAuth();
-  return (
-    // Delivered Code
+  const [comments, setComments] = useState<any[]>([]);
+  const [lastVisible, setLastVisible] = useState<any>(null);
+  const [sortBy, setSortBy] = useState('createdAt');
+  const [isFetching, setIsFetching] = useState(false);
+  const [isLoad,setIsLoad]=useState(false);
 
-    // <div className="App">
-    //   <header className="App-header">
-    //     <img src={logo} className="App-logo" alt="logo" />
-    //     <p>
-    //       Edit <code>src/App.tsx</code> and save to reload.
-    //     </p>
-    //     <a
-    //       className="App-link"
-    //       href="https://reactjs.org"
-    //       target="_blank"
-    //       rel="noopener noreferrer"
-    //     >
-    //       Learn React
-    //     </a>
-    //   </header>
-    // </div>
-   
-      <div className="App">
-        {user ? (
-          <>
-            <div className="Panel-login" >
-              <UserName user={user}/>
-              <Button onClick={logout}>Logout</Button>
-            </div>
-            <Header/>
-            <CommentInput />
-          </>
-        ) : (
-          <>
-            <div className="Panel-logout">
-              <Button onClick={login}>Sign in with Google</Button>
-            </div>
-            <Header/>
-            <CommentInput/>
-          </>
-        )}
+  const fetchComments = async () => {
+    let temp= comments;
+    if (isFetching) return; 
+    setIsFetching(true);
+    try {
+      const { comments: fetchedComments, lastVisible: newLastVisible } = await getComments(sortBy, lastVisible);
+      console.log("Fetched comments:", fetchedComments);
+      temp=[...temp,...fetchedComments]
       
+      setLastVisible(newLastVisible);
+    } catch (error) {
+      console.error("Error fetching comments:", error);
+    } finally {
+      setIsFetching(false);
+      setComments(temp); 
+    }
+  };
 
-      </div>
-    
+  useEffect(() => {
+    fetchComments();
+
+  }, [sortBy]); 
+
+  return (
+    <div className="App">
+      {user ? (
+        <>
+          <div className="Panel-login">
+            <UserName user={user} />
+            <Button onClick={logout}>Logout</Button>
+          </div>
+          <Header />
+          <CommentInput />
+          <CommentList comments={comments} />
+        </>
+      ) : (
+        <>
+          <div className="Panel-logout">
+            <Button onClick={login}>Sign in with Google</Button>
+          </div>
+          <Header />
+          <CommentInput />
+        </>
+      )}
+    </div>
   );
 }
 

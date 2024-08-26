@@ -1,25 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { getComments } from '../services/commentService';
+import React from 'react';
 import Comment from './Comment';
 
-const CommentList: React.FC = () => {
-  const [comments, setComments] = useState<any[]>([]);
-  const [lastVisible, setLastVisible] = useState<any>(null);
-  const [sortBy, setSortBy] = useState('createdAt');
+interface CommentListProps {
+  comments: any[]; 
+}
 
-  const fetchComments = async () => {
-    
-    const { comments, lastVisible: newLastVisible } = await getComments(sortBy, lastVisible);
-    setComments(prev => [...prev, ...comments]);
-    setLastVisible(newLastVisible);
-  };
-
-  useEffect(() => {
-    fetchComments();
-  }, [sortBy]);
+const CommentList: React.FC<CommentListProps> = ({ comments }) => {
+ 
 
   return (
     <div>
+     
       {comments.map((comment) => (
         <Comment key={comment.id} comment={comment} />
       ))}
