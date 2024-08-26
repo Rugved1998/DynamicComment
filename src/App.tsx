@@ -1,12 +1,14 @@
-import React, {useState} from 'react';
+import React from 'react';
 // import logo from './logo.svg';
 import './App.css';
 import CommentInput from './components/CommentInput';
 import UserName  from './components/UserName';
 import { Button } from '@mui/material';
+// import { AuthProvider } from './components/AuthProvider';
+import { useAuth } from './components/AuthProvider';
 
 function App() {
-  const [user,setUser]=useState();
+  const { user, login, logout } = useAuth();
   return (
     // Delivered Code
 
@@ -26,26 +28,28 @@ function App() {
     //     </a>
     //   </header>
     // </div>
-    <div className="App">
-      {user ? (
+   
+      <div className="App">
+        {user ? (
           <>
-          <div className="Panel-login">
-            <UserName/>
-            <Button >Logout</Button>
-          </div>
+            <div className="Panel-login" >
+              <UserName/>
+              <Button onClick={logout}>Logout</Button>
+            </div>
             <CommentInput />
           </>
         ) : (
           <>
-          <div className="Panel-logout">
-            <Button >Sign in with Google</Button>
-          </div>
+            <div className="Panel-logout">
+              <Button onClick={login}>Sign in with Google</Button>
+            </div>
             <CommentInput/>
           </>
         )}
       
 
-    </div>
+      </div>
+    
   );
 }
 
