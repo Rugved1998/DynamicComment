@@ -1,6 +1,7 @@
 import React from 'react';
 // import logo from './logo.svg';
 import './App.css';
+import CommentInput from './components/CommentInput';
 
 function App() {
   return (
@@ -22,7 +23,8 @@ function App() {
     //     </a>
     //   </header>
     // </div>
-    <div>
+    <div className="App">
+      <CommentInput/>
 
     </div>
   );
