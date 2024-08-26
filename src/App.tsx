@@ -14,30 +14,69 @@ function App() {
   const [lastVisible, setLastVisible] = useState<any>(null);
   const [sortBy, setSortBy] = useState('createdAt');
   const [isFetching, setIsFetching] = useState(false);
-  const [isLoad,setIsLoad]=useState(false);
 
   const fetchComments = async () => {
-    let temp= comments;
+    let temp=comments;
     if (isFetching) return; 
     setIsFetching(true);
     try {
       const { comments: fetchedComments, lastVisible: newLastVisible } = await getComments(sortBy, lastVisible);
-      console.log("Fetched comments:", fetchedComments);
-      temp=[...temp,...fetchedComments]
-      
+     temp=[...temp, ...fetchedComments];
       setLastVisible(newLastVisible);
     } catch (error) {
       console.error("Error fetching comments:", error);
     } finally {
       setIsFetching(false);
-      setComments(temp); 
+      setComments(temp);
     }
   };
 
   useEffect(() => {
     fetchComments();
-
   }, [sortBy]); 
+
+  // Handle Like and Dislike interactions
+  const handleLike = (commentId: string) => {
+    setComments(prevComments =>
+      prevComments.map(comment => {
+        if (comment.id === commentId) {
+          if (comment.userLiked) {
+            return { ...comment, like: comment.like - 1, userLiked: false };
+          } else {
+            return {
+              ...comment,
+              like: comment.like + 1,
+              dislike: comment.userDisliked ? comment.dislike - 1 : comment.dislike,
+              userLiked: true,
+              userDisliked: false,
+            };
+          }
+        }
+        return comment;
+      })
+    );
+  };
+
+  const handleDislike = (commentId: string) => {
+    setComments(prevComments =>
+      prevComments.map(comment => {
+        if (comment.id === commentId) {
+          if (comment.userDisliked) {
+            return { ...comment, dislike: comment.dislike - 1, userDisliked: false };
+          } else {
+            return {
+              ...comment,
+              dislike: comment.dislike + 1,
+              like: comment.userLiked ? comment.like - 1 : comment.like,
+              userDisliked: true,
+              userLiked: false,
+            };
+          }
+        }
+        return comment;
+      })
+    );
+  };
 
   return (
     <div className="App">
@@ -49,7 +88,7 @@ function App() {
           </div>
           <Header />
           <CommentInput />
-          <CommentList comments={comments} />
+          <CommentList comments={comments} onLike={handleLike} onDislike={handleDislike} />
         </>
       ) : (
         <>

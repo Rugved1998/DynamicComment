@@ -16,11 +16,13 @@ const CommentInput: React.FC = () => {
 
   const handleCommentSubmit = async () => {
     if (comment.trim()) {
-      await addComment({ text: comment, userId: user?.uid, userName: user?.displayName, file });
+      await addComment({ text: comment, userId: user?.uid, userName: user?.displayName, file,like,dislike });
       setComment('');
       setFile(null);
     }
   };
+  const like=0;
+  const dislike=0;
 
   return (
     <div>

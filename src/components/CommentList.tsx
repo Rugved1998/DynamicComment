@@ -3,16 +3,20 @@ import Comment from './Comment';
 
 interface CommentListProps {
   comments: any[]; 
+  onLike: (commentId: string) => void;
+  onDislike: (commentId: string) => void;
 }
 
-const CommentList: React.FC<CommentListProps> = ({ comments }) => {
- 
-
+const CommentList: React.FC<CommentListProps> = ({ comments, onLike, onDislike }) => {
   return (
     <div>
-     
       {comments.map((comment) => (
-        <Comment key={comment.id} comment={comment} />
+        <Comment
+          key={comment.id}
+          comment={comment}
+          onLike={() => onLike(comment.id)}
+          onDislike={() => onDislike(comment.id)}
+        />
       ))}
     </div>
   );
