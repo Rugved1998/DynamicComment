@@ -6,6 +6,7 @@ import UserName  from './components/UserName';
 import { Button } from '@mui/material';
 // import { AuthProvider } from './components/AuthProvider';
 import { useAuth } from './components/AuthProvider';
+import Header from './components/Header';
 
 function App() {
   const { user, login, logout } = useAuth();
@@ -36,6 +37,7 @@ function App() {
               <UserName user={user}/>
               <Button onClick={logout}>Logout</Button>
             </div>
+            <Header/>
             <CommentInput />
           </>
         ) : (
@@ -43,6 +45,7 @@ function App() {
             <div className="Panel-logout">
               <Button onClick={login}>Sign in with Google</Button>
             </div>
+            <Header/>
             <CommentInput/>
           </>
         )}
