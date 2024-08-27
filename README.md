@@ -1,46 +1,64 @@
-# Getting Started with Create React App
+**Comment System with Google Authentication and Rich Text Features
+Overview**
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a dynamic comment system integrated with Google Authentication. It allows users to post comments with rich text features, attach files, tag people, sort comments by latest and popularity, and includes pagination. The backend is managed using Firebase, which handles authentication, storage, and database management.
+Figma Design
+You can view the design for this project in the following Figma file: Comment System Design
+Functional Requirements
+1.	Google Authentication
+o	Integrate Google Authentication to allow users to sign in and post comments.
+2.	Comment Input Box
+o	Rich text formatting options: bold, italic, underline, and hyperlink.
+o	Character limit: 250.
+3.	Comment Sorting
+o	Sort comments by latest and by popularity (based on reactions).
+4.	Comment Features
+o	Display user’s profile picture, name, and comment text.
+o	Reaction buttons with counts.
+5.	Pagination
+o	Display 8 comments per page with pagination controls.
+Setup Instructions
+Prerequisites
+•	Node.js and npm/yarn installed.
+•	Firebase project set up (Authentication, Firestore, Storage).
+•	Google API credentials for authentication.
+Installation
+1.	Clone the repository:
+bash
+Copy code
+git clone https://github.com/your-username/comment-system.git
+cd comment-system
+2.	Install dependencies:
+bash
+Copy code
+npm install
+# or
+yarn install
+3.	Set up Firebase:
+o	Create a .env file in the root directory and add your Firebase configuration:
+makefile
+Copy code
+REACT_APP_FIREBASE_API_KEY=your-api-key
+REACT_APP_FIREBASE_AUTH_DOMAIN=your-auth-domain
+REACT_APP_FIREBASE_PROJECT_ID=your-project-id
+REACT_APP_FIREBASE_STORAGE_BUCKET=your-storage-bucket
+REACT_APP_FIREBASE_MESSAGING_SENDER_ID=your-messaging-sender-id
+REACT_APP_FIREBASE_APP_ID=your-app-id
+4.	Start the development server:
+bash
+Copy code
+npm start
+# or
+yarn start
 
-## Available Scripts
+Features
+•	Google Authentication: Users can sign in using Google to post comments.
+•	Rich Text Formatting: Apply bold, italic, underline, and hyperlinks to comments.
+•	User Tagging: Tag people within comments.
+•	Comment Sorting: Sort comments by latest or popularity.
+•	Comment Display:
+o	Shows profile picture, name, and comment text.
+o	Includes reaction buttons and counts.
+o	The limit of Comment is set to 250 characters.
+•	Pagination: Displays 8 comments per page with pagination controls.
 
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
