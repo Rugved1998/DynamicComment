@@ -21,8 +21,8 @@ const CommentInput: React.FC = () => {
       setFile(null);
     }
   };
-  const like=0;
-  const dislike=0;
+  let like=0;
+  let dislike=0;
 
   return (
     <div>
