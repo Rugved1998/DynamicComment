@@ -8,10 +8,10 @@ interface CommentListProps {
 }
 
 const CommentList: React.FC<CommentListProps> = ({ comments, onLike, onDislike }) => {
-  const cons=()=>{console.log('Comment List')}
-  {cons();}
+  
+  
   return (
-    <div>
+    <div className='comment-list-container'>
       {comments.map((comment) => (
         <Comment
           key={comment.id}

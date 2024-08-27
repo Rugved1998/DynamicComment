@@ -8,7 +8,10 @@ interface CommentProps {
 
 const Comment: React.FC<CommentProps> = ({ comment, onLike, onDislike }) => {
   return (
-    <div>
+    <div className='comment'>
+       <div className={'logo'}>
+            <img src={`${comment.profile}` } alt={'profile'}/>
+        </div>
       <p><strong>{comment.userName}</strong></p>
       <p>{comment.text}</p>
      

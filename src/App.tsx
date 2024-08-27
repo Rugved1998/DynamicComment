@@ -99,6 +99,9 @@ function App() {
     setComments(updatedComments);
   };
 
+  	
+  const commentsCount = comments.length;
+
   return (
     <div className="App">
       {user ? (
@@ -107,7 +110,7 @@ function App() {
             <UserName user={user} />
             <Button onClick={logout}>Logout</Button>
           </div>
-          <Header handleSort={handleSort} />
+          <Header handleSort={handleSort}  commentsCount={commentsCount} />
           <CommentInput />
           <CommentList comments={sortedComments} onLike={handleLike} onDislike={handleDislike} />
         </>
@@ -116,7 +119,7 @@ function App() {
           <div className="Panel-logout">
             <Button onClick={login}>Sign in with Google</Button>
           </div>
-          <Header handleSort={handleSort} />
+          <Header handleSort={handleSort}  commentsCount={commentsCount}/>
           <CommentInput />
           <CommentList comments={sortedComments} onLike={handleLike} onDislike={handleDislike} />
         </>

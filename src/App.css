@@ -74,7 +74,7 @@ label{
   border:1px solid black;
 }
 
-/* App.css */
+
 
 .sort button {
   padding: 10px 20px;
@@ -94,4 +94,59 @@ label{
 .sort button:disabled {
   background-color: #c0c0c0;
   cursor: not-allowed;
+}
+
+
+/* CommentInput.css */
+
+.comment-input-container {
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  background-color: #fff;
+  min-width: 600px;
+  margin: 10px;
+}
+
+.comment-input-container .MuiTextField-root {
+  margin-bottom: 16px;
+}
+
+.comment-input-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.comment-input-actions .MuiIconButton-root {
+  color: #555;
+}
+
+.comment-input-actions .MuiIconButton-root:hover {
+  color: #000;
+}
+
+.comment-input-actions input[type="file"] {
+  display: none;
+}
+
+.comment-list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 15px;
+  min-width: 600px;
+  margin: 20px;
+}
+
+.comment {
+  background-color: #f9f9f9;
+  border: 1px solid #e1e1e1;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }

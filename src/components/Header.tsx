@@ -2,23 +2,21 @@ import React, { useState } from 'react';
 
 interface HeaderProps {
   handleSort: (sortBy: 'createdAt' | 'reactCount') => void;
+  commentsCount: number; // Added commentsCount prop
 }
 
-const Header: React.FC<HeaderProps> = ({ handleSort }) => {
+const Header: React.FC<HeaderProps> = ({ handleSort, commentsCount }) => {
   const [activeButton, setActiveButton] = useState<'createdAt' | 'reactCount'>('createdAt');
 
   const handleClick = (sortBy: 'createdAt' | 'reactCount') => {
-    
     setActiveButton(sortBy);
     handleSort(sortBy);
-    
-
   };
 
   return (
     <div className="header">
       <div>
-        Comments
+        Comments ({commentsCount}) {/* Display count of comments */}
       </div>
       <div className="sort">
         <button
